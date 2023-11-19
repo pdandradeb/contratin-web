@@ -1,4 +1,5 @@
 import { getFieldType } from "./getFieldType";
+import { State } from "./getInitialStateFromTemplate";
 import { getPropertiesFromTemplate } from "./getPropertiesFromTemplate";
 import set from "lodash/set";
 
@@ -11,8 +12,8 @@ export type Fields = {
   [k: string]: Fields | Field;
 };
 
-export const getFieldsFromTemplate = (template: string) => {
-  const properties = getPropertiesFromTemplate(template);
+export const getFieldsFromState = (state: State) => {
+  const properties = Object.keys(state);
   return properties.reduce((r, property) => {
     const path = property.split(".");
     return set({ ...r }, property, {
